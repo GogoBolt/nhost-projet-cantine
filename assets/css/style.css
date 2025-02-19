@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #0070BA;
+  --primary-hover: #003087;
+  --secondary-color: #169BD7;
+  --success-color: #2C9B00;
+  --danger-color: #C72E2E;
+  --warning-color: #FFB700;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  @apply bg-gray-50 text-gray-900;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Animations */
+.fade-enter-active,
+.fade-leave-active {
+  @apply transition-opacity duration-300;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  @apply opacity-0;
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  @apply transition-all duration-300 ease-out;
+}
+
+.slide-up-enter-from,
+.slide-up-leave-to {
+  @apply opacity-0 transform translate-y-4;
+}
+
+/* Components */
+.btn {
+  @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.btn-primary {
+  @apply bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
+}
+
+.btn-secondary {
+  @apply bg-secondary-500 text-white hover:bg-secondary-600 focus:ring-secondary-500;
+}
+
+.card {
+  @apply bg-white rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl p-6;
+}
+
+.input {
+  @apply w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-colors;
+}
+
+/* Layout */
+.page-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8;
+}
+
+.section {
+  @apply py-12;
+}
+
+/* Navigation */
+.nav-link {
+  @apply text-gray-600 hover:text-primary-600 transition-colors;
+}
+
+.nav-link-active {
+  @apply text-primary-600 font-medium;
+}
+
+/* Toast Notifications */
+.toast-container {
+  @apply fixed bottom-4 right-4 z-50;
+}
+
+.toast {
+  @apply mb-2 p-4 rounded-lg shadow-lg transform transition-all duration-300;
+}
+
+.toast-success {
+  @apply bg-success text-white;
+}
+
+.toast-error {
+  @apply bg-danger text-white;
+}
+
+.toast-info {
+  @apply bg-primary-600 text-white;
+}

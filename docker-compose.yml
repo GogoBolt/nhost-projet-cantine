@@ -1,0 +1,41 @@
+ 
+
+services:
+  nhost:
+    image: nhost/cli:v1.29.3
+    container_name: projet_config-nhost-simple-nhost
+    environment:
+      - NHOST_GRAPHQL_ENDPOINT=http://localhost:8080/v1/graphql
+      - NHOST_REST_ENDPOINT=http://localhost:8080/rest
+    ports:
+      - "8081:8080"
+      - "3000:3000"
+    volumes:
+      - ./nhost:/data
+  
+  minio:
+    image: minio/minio:RELEASE.2022-07-08T00-05-23Z
+    container_name: projet_config-nhost-simple-minio
+    environment:
+      - MINIO_ACCESS_KEY=minio
+      - MINIO_SECRET_KEY=minio123
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./data:/data
+  
+  mailhog:
+    image: jcalonso/mailhog:v1.0.1
+    container_name: projet_config-nhost-simple-mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+  traefik:
+    image: traefik:v3.1
+    container_name: projet_config-nhost-simple-traefik
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"

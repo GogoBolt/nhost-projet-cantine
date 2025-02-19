@@ -1,0 +1,44 @@
+{
+  "name": "cantine-scolaire",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@headlessui/vue": "^1.7.19",
+    "@heroicons/vue": "^2.1.1",
+    "@nhost/nhost-js": "^3.2.4",
+    "@nhost/vue": "^2.9.1",
+    "@paypal/paypal-js": "^8.0.2",
+    "@vue/compiler-sfc": "^3.5.13",
+    "@vueuse/motion": "^2.0.0",
+    "dayjs": "^1.11.10",
+    "framer-motion": "^11.0.5",
+    "nuxt": "^3.15.4",
+    "qrcode.vue": "^3.4.1",
+    "vite-plugin-checker": "^0.8.0",
+    "vue": "^3.4.19",
+    "vue-qrcode-reader": "^5.5.1",
+    "vue-router": "^4.3.0",
+    "vue3-toastify": "^0.2.1"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxt/types": "^2.18.1",
+    "@nuxtjs/tailwindcss": "^6.11.4",
+    "@types/node": "^22.13.4",
+    "autoprefixer": "^10.4.18",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3",
+    "vue-tsc": "^2.1.6"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
