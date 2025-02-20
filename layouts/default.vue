@@ -7,13 +7,23 @@
       </div>
     </main>
     <Footer />
-    <toast-container position="top-right" />
+    <!-- Utilisez le composant ToastContainer ici -->
+    <ToastContainer position="top-right" />
   </div>
 </template>
 
 <script setup lang="ts">
 import Header from '~/components/Header.vue';
 import Footer from '~/components/Footer.vue';
-import { toast } from 'vue3-toastify';
+import { defineComponent } from 'vue';
+
+import { toastContainers, toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+
+// Enregistrez le composant ToastContainer
+defineComponent({
+  components: {
+    toastContainers,
+  },
+});
 </script>

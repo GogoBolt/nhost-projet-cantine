@@ -7,6 +7,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
 
+  plugins: ['~/plugins/toastify.ts'],
+
   runtimeConfig: {
     public: {
       nhostSubdomain: process.env.NUXT_PUBLIC_NHOST_SUBDOMAIN || 'local',
