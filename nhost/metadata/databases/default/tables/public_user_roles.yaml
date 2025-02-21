@@ -1,0 +1,51 @@
+table:
+  name: user_roles
+  schema: public
+  columns:
+    - name: user_id
+      type: uuid
+      is_nullable: false
+    - name: role_id
+      type: uuid
+      is_nullable: false
+    - name: created_at
+      type: timestamptz
+      default: now()
+  
+  foreign_keys:
+    - name: user_roles_user_id_fkey
+      columns:
+        - user_id
+      ref_table: auth.users
+      ref_columns:
+        - id
+      on_delete: cascade
+    - name: user_roles_role_id_fkey
+      columns:
+        - role_id
+      ref_table: roles
+      ref_columns:
+        - id
+      on_delete: cascade
+  
+  select_permissions:
+    - role: user
+      permission:
+        columns:
+          - user_id
+          - role_id
+        filter:
+          user_id: X-Hasura-User-Id
+    
+  insert_permissions:
+    - role: admin
+      permission:
+        columns:
+          - user_id
+          - role_id
+        check: {}
+
+  delete_permissions:
+    - role: admin
+      permission:
+        filter: {}

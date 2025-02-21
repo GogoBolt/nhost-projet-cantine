@@ -1,18 +1,13 @@
-import { loadScript } from "@paypal/paypal-js";
-import { defineNuxtPlugin }from 'nuxt/app';
-import type { PayPalScriptOptions } from '@paypal/paypal-js';
+// This file will be removed as we'll use Nhost for payments
+import { defineNuxtPlugin } from 'nuxt/app';
 
-export default defineNuxtPlugin(async (nuxtApp) => {
-  const options: PayPalScriptOptions = {
-    clientId: process.env.PAYPAL_CLIENT_ID || "test",
-    currency: "EUR",
-  };
-
-  const paypal = await loadScript(options);
-
+export default defineNuxtPlugin((nuxtApp) => {
+  // Placeholder for future Nhost payment integration
   return {
     provide: {
-      paypal,
-    },
+      payment: {
+        // Payment methods will be implemented using Nhost
+      }
+    }
   };
 });

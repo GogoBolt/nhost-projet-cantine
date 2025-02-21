@@ -1,0 +1,43 @@
+table:
+  name: roles
+  schema: public
+  columns:
+    - name: id
+      type: uuid
+      default: gen_random_uuid()
+      is_primary: true
+    - name: name
+      type: text
+      is_nullable: false
+      is_unique: true
+    - name: description
+      type: text
+    - name: created_at
+      type: timestamptz
+      default: now()
+  
+  select_permissions:
+    - role: user
+      permission:
+        columns:
+          - id
+          - name
+          - description
+        filter: {}
+    
+  insert_permissions:
+    - role: admin
+      permission:
+        columns:
+          - name
+          - description
+        check: {}
+
+  update_permissions:
+    - role: admin
+      permission:
+        columns:
+          - name
+          - description
+        filter: {}
+        check: {}

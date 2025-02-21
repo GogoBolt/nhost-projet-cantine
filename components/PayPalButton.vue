@@ -1,61 +1,31 @@
+<!-- This component will be replaced with Nhost payment integration -->
 <template>
-  <div ref="paypalButtonContainer" class="w-full"></div>
+  <button 
+    class="w-full px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+    @click="handlePayment"
+  >
+    Payer maintenant
+  </button>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useNuxtApp }from 'nuxt/app';
-
-const { $paypal } = useNuxtApp();
-const paypalButtonContainer = ref<HTMLElement | null>(null);
+const emit = defineEmits<{
+  success: [details: any];
+  error: [error: Error];
+}>();
 
 const props = defineProps<{
   amount: number;
   currency?: string;
 }>();
 
-const emit = defineEmits<{
-  success: [details: any];
-  error: [error: Error];
-}>();
-
-onMounted(async () => {
-  interface PayPal {
-  Buttons: any;
-  // autres propriétés et méthodes
-}
-
-const { $paypal } = useNuxtApp() as unknown as { $paypal: PayPal };
-  if (!paypalButtonContainer.value) return;
-
+const handlePayment = async () => {
+  // TODO: Implement Nhost payment integration
   try {
-    await $paypal.Buttons({
-      style: {
-        layout: 'vertical',
-        color: 'blue',
-        shape: 'rect',
-        label: 'pay'
-      },
-      createOrder: (data: any, actions: any) => {
-        return actions.order.create({
-          purchase_units: [{
-            amount: {
-              value: props.amount.toString(),
-              currency_code: props.currency || 'EUR'
-            }
-          }]
-        });
-      },
-      onApprove: async (data: any, actions: any) => {
-        const details = await actions.order.capture();
-        emit('success', details);
-      },
-      onError: (err: Error) => {
-        emit('error', err);
-      }
-    }).render(paypalButtonContainer.value);
+    // Placeholder for Nhost payment logic
+    emit('success', { status: 'COMPLETED' });
   } catch (error) {
-    console.error('Failed to render PayPal Buttons:', error);
+    emit('error', error as Error);
   }
-});
+};
 </script>

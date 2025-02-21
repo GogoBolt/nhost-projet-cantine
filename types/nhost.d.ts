@@ -1,23 +1,38 @@
-// types/nhost.ts
-export interface NhostAuthMethods {
-  signIn(arg0: { email: string; password: string; }): { session: any; error: any; } | PromiseLike<{ session: any; error: any; }>;
-  register: (email: string, password: string, role?: string) => Promise<boolean>;
-  login: (email: string, password: string) => Promise<boolean>;
-  logout: () => Promise<boolean>;
-  loginWithProvider: (provider: string) => Promise<boolean>;  // Ajouter la méthode ici
-  
+import { NhostClient } from '@nhost/nhost-js';
+
+export interface NhostAuthResponse {
+  session: any;
+  error: any;
 }
 
-// Étendre le type global pour Nuxt
+export interface NhostAuthMethods {
+  signIn(credentials: { email: string; password: string }): Promise<NhostAuthResponse>;
+  signUp(credentials: { 
+    email: string; 
+    password: string;
+    options?: {
+      defaultRole?: string;
+      allowedRoles?: string[];
+      metadata?: Record<string, any>;
+    }
+  }): Promise<NhostAuthResponse>;
+  signOut(): Promise<{ error: any }>;
+  getUser(): any;
+  isAuthenticated(): boolean;
+  refreshSession(): Promise<{ error: any }>;
+  resetPassword(email: string): Promise<{ error: any }>;
+  changePassword(newPassword: string): Promise<{ error: any }>;
+  changeEmail(newEmail: string): Promise<{ error: any }>;
+}
+
 declare module '#app' {
   interface NuxtApp {
-    auth: NhostAuthMethods;
+    $nhost: NhostClient;
   }
 }
 
-// Étendre le type global pour Vue
-declare module 'vue' {
+declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
-    $auth: NhostAuthMethods;
+    $nhost: NhostClient;
   }
 }

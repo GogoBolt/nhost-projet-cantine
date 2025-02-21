@@ -1,26 +1,35 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-
-import { defineNuxtConfig } from 'nuxt/config';
+import {defineNuxtConfig} from 'nuxt/config'
 
 export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
 
-  plugins: ['~/plugins/toastify.ts'],
+  plugins: [
+    '~/plugins/toastify.ts',
+    '~/plugins/nhost.ts'
+  ],
 
   runtimeConfig: {
     public: {
-      nhostSubdomain: process.env.NUXT_PUBLIC_NHOST_SUBDOMAIN || 'local',
-      nhostRegion: process.env.NUXT_PUBLIC_NHOST_REGION || 'local',
-      nhostBackendUrl: process.env.NUXT_PUBLIC_NHOST_BACKEND_URL || 'http://localhost:1337/v1/graphql',
-      nhostAuthUrl: process.env.NUXT_PUBLIC_NHOST_AUTH_URL || 'http://localhost:1337/v1/auth',
-      nhostStorageUrl: process.env.NUXT_PUBLIC_NHOST_STORAGE_URL || 'http://localhost:1337/v1/storage',
-      nhostFunctionsUrl: process.env.NUXT_PUBLIC_NHOST_FUNCTIONS_URL || 'http://localhost:1337/v1/functions',
-      nhostDashboardUrl: process.env.NUXT_PUBLIC_NHOST_DASHBOARD_URL || 'http://localhost:1337',
-      nhostMailhogUrl: process.env.NUXT_PUBLIC_NHOST_MAILHOG_URL || 'http://localhost:8025',
-      nhostPostgresUrl: process.env.NUXT_PUBLIC_NHOST_POSTGRES_URL || 'postgres://postgres:postgres@localhost:5432/local'
+      nhostSubdomain: process.env.NHOST_SUBDOMAIN || 'local',
+      nhostRegion: process.env.NHOST_REGION || 'local',
+      nhostBackendUrl: process.env.NHOST_BACKEND_URL || 'http://localhost:1337/v1',
+      nhostAdminSecret: process.env.NHOST_ADMIN_SECRET,
+      appTitle: 'Gestion des cantines scolaires',
+      appDescription: 'Application de gestion des cantines scolaires'
     }
+  },
+
+  typescript: {
+    strict: true,
+    typeCheck: true,
+    shim: false
+  },
+
+  build: {
+    transpile: ['@headlessui/vue']
   },
 
   app: {
@@ -37,18 +46,5 @@ export default defineNuxtConfig({
     }
   },
 
-  typescript: {
-    strict: true,
-    typeCheck: true
-  },
-
-  build: {
-    transpile: ['@headlessui/vue']
-  },
-
-  nitro: {
-    preset: 'node'
-  },
-
-  compatibilityDate: '2025-02-18'
-})
+  compatibilityDate: '2025-02-21'
+});
